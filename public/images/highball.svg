@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Glass body -->
+  <path d="M22 12 L25 68 L55 68 L58 12 Z" stroke="#2C2A28" stroke-width="2" stroke-linejoin="round" fill="none"/>
+  <!-- Liquid fill -->
+  <path d="M23.5 26 L24.8 68 L55.2 68 L56.5 26 Z" fill="#2C2A28" fill-opacity="0.08"/>
+  <!-- Ice cubes -->
+  <rect x="30" y="32" width="9" height="9" rx="1.5" stroke="#2C2A28" stroke-width="1.2" fill="none" transform="rotate(-8 34.5 36.5)"/>
+  <rect x="41" y="35" width="8" height="8" rx="1.5" stroke="#2C2A28" stroke-width="1.2" fill="none" transform="rotate(6 45 39)"/>
+  <!-- Garnish straw -->
+  <line x1="46" y1="12" x2="52" y2="42" stroke="#2C2A28" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Condensation dots -->
+  <circle cx="27" cy="50" r="1.2" fill="#2C2A28" fill-opacity="0.2"/>
+  <circle cx="28" cy="57" r="0.9" fill="#2C2A28" fill-opacity="0.15"/>
+</svg>

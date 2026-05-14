@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #FAF8F5;
+    --text-primary: #2C2A28;
+    --accent-red: #D9381E;
+  }
+
+  .dark {
+    --bg-primary: #1A1715;
+    --text-primary: #FAF8F5;
+    --accent-red: #E64A33;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .image-blend {
+    mix-blend-mode: multiply;
+  }
+
+  .dark .image-blend {
+    mix-blend-mode: screen;
+    filter: invert(1);
+    opacity: 0.9;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
