@@ -9,7 +9,6 @@ taarmeny/
 │   └── page.tsx
 ├── components
 │   ├── AnimateIn.tsx
-│   ├── GlassIcon.tsx
 │   ├── MenuCard.tsx
 │   └── ThemeToggle.tsx
 ├── llm_ingest.py
@@ -481,127 +480,59 @@ export default function RootLayout({
 
 ### File: app/page.tsx
 ```tsx
+import Image from "next/image";
 import MenuCard from "@/components/MenuCard";
 import ThemeToggle from "@/components/ThemeToggle";
 import AnimateIn from "@/components/AnimateIn";
 
 const MENU_DATA = [
   {
-    id: "signaturcocktails",
-    category: "Signaturcocktails",
+    id: "signatur",
+    category: "Cocktailmeny",
     price: "kr 189,-",
     items: [
-      {
-        name: "Thai basilikum",
-        flavor: "Grønn, aromatisk, floral, leskende",
-        ingredients:
-          "Thai basilikum · gin · tequila · bergamot · sukkerlake · eplesyre · kullsyrevann",
-        glass: "Highball",
-      },
-      {
-        name: "Venezuela's ånd",
-        flavor: "Frisk, urtepreget, krydret, syrlig, tropisk",
-        ingredients:
-          "Lys rom · Green Chartreuse · falernum · kanelsirup · sitron · lime · agurk",
-        glass: "Tiki",
-      },
-      {
-        name: "Blomsten fra Jerez",
-        flavor: "Tørr, nøttepreget, fruktig, syrlig, rund",
-        ingredients:
-          "Amontillado sherry · rom · aprikoslikør · sukkerlake · sitron · Angostura",
-        glass: "Coupe",
-      },
-      {
-        name: "Røkt Negroni",
-        flavor: "Bitter, kompleks, røkt, balansert",
-        ingredients:
-          "Gin · Campari · søt vermouth · røkt rosemarin · appelsinskall",
-        glass: "Nick & Nora",
-      },
-      {
-        name: "Spiced Mango Sour",
-        flavor: "Søt, syrlig, krydret, tropisk",
-        ingredients:
-          "Tequila · mango · limejuice · jalapeño · agavesirup · eggehvite",
-        glass: "Coupe",
-      },
+      { name: "Thai basilikum", flavor: "Grønn, aromatisk, floral, leskende", ingredients: "Thai basilikum-infusert gin · bergamotlikør · tequila · sukkerlake · eplesyre · kullsyrevann", imagePath: "/images/highball.png" },
+      { name: "Venezuela's ånd", flavor: "Frisk, urtepreget, krydret, syrlig, tropisk", ingredients: "Lys rom, Green Chartreuse, falernum, kanelsirup, sitron, lime, agurk", imagePath: "/images/highball.png" },
+      { name: "Blomsten fra Jerez", flavor: "Tørr, nøttepreget, fruktig, syrlig, rund", ingredients: "Amontillado sherry · rom · aprikoslikør · sukkerlake · sitron · Angostura bitters", imagePath: "/images/coupe.png" },
+      { name: "Te-tid", flavor: "Lys, te-aroma, ren syre, subtil sødme, frisk", ingredients: "Darjeeling-infusert melkevasket vodka, honningsirup, sitron", imagePath: "/images/coupe.png" },
+      { name: "Siste blomst", flavor: "Røykfylt, floral, urtepreget, spenstig", ingredients: "Mezcal, St-Germain, Bénédictine D.O.M., sitron", imagePath: "/images/nick&nora.png" },
+      { name: "Eksperimentet", flavor: "Mørk, krydret, aromatisk, med mange lag", ingredients: "Bourbon · fino sherry · Cocchi Americano · Bénédictine · Angostura bitters · orange bitters · Peychaud's bitters", imagePath: "/images/nick&nora.png" },
+      { name: "Bivoks", flavor: "Varm, aromatisk, mild honning, sofistikert", ingredients: "Bivoks-infusert bourbon · cognac · sukkerlake · Angostura bitters · Peychaud's bitters", imagePath: "/images/rocks.png" },
     ],
   },
   {
-    id: "manedens-cocktail",
-    category: "Månedens cocktail",
-    price: "kr 189,-",
-    items: [
-      {
-        name: "Vårens Løfte",
-        flavor: "Blomstrete, lyst, elegant, lett syrlig",
-        ingredients:
-          "Vodka · hylleblomstkordial · sitron · elderflower tonic · friske urter",
-        glass: "Coupe",
-      },
-      {
-        name: "Midnattshagen",
-        flavor: "Mørk, urtete, bittersøt, lang finish",
-        ingredients:
-          "Mezcal · Cynar · benediktine · sort pepper · sitron · timian",
-        glass: "Highball",
-      },
-    ],
-  },
-  {
-    id: "ol-og-vin",
-    category: "Øl & Vin",
+    id: "manedens",
+    category: "Månedens Utvalgte",
     price: null,
     items: [
-      {
-        name: "Fatøl",
-        flavor: "Frisk, lett, hvetepreget",
-        ingredients: "Lokal bryggeri · 0,4 l",
-        glass: "Beer",
-      },
-      {
-        name: "Naturvin — hvit",
-        flavor: "Mineralsk, tørr, fruktig",
-        ingredients: "Skjenkes etter sesong · glass",
-        glass: "Wine",
-      },
-      {
-        name: "Naturvin — rød",
-        flavor: "Jordlig, saftig, lavtannin",
-        ingredients: "Skjenkes etter sesong · glass",
-        glass: "Wine",
-      },
+      { name: "Månedens Margarita", flavor: "Fruktig, spicy, saftig", ingredients: "Jalapeño-infusert tequila, Cointreau, klarifisert jordbær, agave, lime", imagePath: "/images/rocks.png" },
+      { name: "Månedens Tiki", flavor: "Tropisk, rund, fyldig, frisk", ingredients: "Smørvasket jamaicansk rom, bananlikør, lønnesirup, lime", imagePath: "/images/tiki.png" },
+      { name: "Månedens Negroni", flavor: "Frisk, lett bitter, floral, sitruspreget", ingredients: "Aperol · Lillet Blanc · Hendrick's gin", imagePath: "/images/rocks.png" },
     ],
   },
   {
-    id: "alkoholfritt",
-    category: "Alkoholfritt",
-    price: "kr 129,-",
+    id: "ol",
+    category: "Øl",
+    price: null,
     items: [
-      {
-        name: "Havtorn & Ingefær",
-        flavor: "Syrlig, krydret, livlig, frisk",
-        ingredients:
-          "Havtornpuré · ingefærsirup · sitron · kullsyrevann · urter",
-        glass: "Highball",
-      },
-      {
-        name: "Rosenblad Lemonade",
-        flavor: "Blomstrete, søt, forfriskende",
-        ingredients: "Rosenvann · sitron · agavesirup · tonic · roseknopper",
-        glass: "Highball",
-      },
+      { name: "Husets Øl", flavor: "Spør oss om dagens utvalg", ingredients: "Lokalt og internasjonalt", imagePath: "/images/highball.png" },
+    ],
+  },
+  {
+    id: "vin",
+    category: "Vin",
+    price: null,
+    items: [
+      { name: "Husets Vin", flavor: "Utvalgte glass", ingredients: "Rødt, hvitt, oransje eller bobler", imagePath: "/images/nick&nora.png" },
     ],
   },
 ];
 
 const NAV_ITEMS = [
-  { label: "Signatur", href: "#signaturcocktails" },
-  { label: "Måneden", href: "#manedens-cocktail" },
-  { label: "Øl & Vin", href: "#ol-og-vin" },
-  { label: "Alkoholfritt", href: "#alkoholfritt" },
-  { label: "Bestill", href: "#booking" },
+  { label: "Cocktailmeny", href: "#signatur" },
+  { label: "Månedens utvalgte", href: "#manedens" },
+  { label: "Øl", href: "#ol" },
+  { label: "Vin", href: "#vin" },
 ];
 
 export default function MenuPage() {
@@ -615,38 +546,50 @@ export default function MenuPage() {
 
       {/* Hero */}
       <header id="konsept" className="mb-12 text-center flex flex-col items-center">
-        <div className="mb-6" aria-hidden="true">
-          <TaarLogo />
+        <div className="flex justify-center items-center mb-6 h-[180px] md:h-[220px]">
+          <Image
+            src="/images/logo-light.png"
+            alt="Taar logo"
+            width={288}
+            height={220}
+            priority
+            className="object-contain block dark:hidden w-60 md:w-72 h-auto"
+          />
+          <Image
+            src="/images/logo-dark.png"
+            alt="Taar logo"
+            width={288}
+            height={220}
+            priority
+            className="object-contain hidden dark:block w-60 md:w-72 h-auto"
+          />
         </div>
-        <h1 className="font-serif text-[clamp(2.5rem,8vw,4.5rem)] font-extrabold text-[var(--accent-red)] mb-4 tracking-tighter leading-none">
-          Taar
-        </h1>
+        <h1 className="sr-only">Taar Café og Cocktailbar - Menyen</h1>
         <h2 className="font-serif text-[clamp(1.25rem,4vw,2rem)] font-medium mb-2">Menyen</h2>
         <p className="font-sans text-sm opacity-50 tracking-wide">
-          Eksperimentelle smaker i hjertet av Posebyhaven.
+          Cocktailkunst i hjertet av Kristiansand.
         </p>
       </header>
 
       {/* Global pricing note */}
-      <div className="text-center mb-10 pb-10 border-b border-black/10 dark:border-white/10">
-        <p className="font-sans uppercase tracking-[0.2em] text-xs opacity-60 mb-2">
-          Alle signatur- &amp; månedscocktails
-        </p>
-        <p className="font-serif italic text-2xl">kr 189,–</p>
+      <div className="text-center mb-6">
+        <p className="font-sans uppercase tracking-[0.2em] text-sm opacity-80">Alle signatur- & månedscocktails</p>
+        <p className="font-serif italic text-2xl mt-2">kr 189,-</p>
+        <p className="font-serif italic text-sm opacity-60 mt-3">Vi lager også gjerne klassikeren du elsker!</p>
       </div>
 
       {/* Sticky category nav */}
       <nav
         id="meny"
-        className="sticky top-0 z-50 bg-[var(--bg-primary)]/80 backdrop-blur-md py-4 mb-10 -mx-6 px-6 border-b border-black/5 dark:border-white/5"
+        className="sticky top-0 z-50 flex items-center bg-[var(--bg-primary)]/80 backdrop-blur-md pt-[calc(env(safe-area-inset-top)+1rem)] pb-4 md:pt-[calc(env(safe-area-inset-top)+1.25rem)] md:pb-5 mb-12 -mx-6 px-6 border-y border-black/10 dark:border-white/10 overflow-x-auto no-scrollbar"
         aria-label="Menykategorier"
       >
-        <ul className="flex overflow-x-auto flex-nowrap whitespace-nowrap no-scrollbar gap-1 font-sans text-[0.65rem] uppercase tracking-widest font-semibold opacity-60">
+        <ul className="flex gap-2 items-center font-sans text-xs uppercase tracking-widest font-semibold opacity-70 w-max">
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
-                className="flex items-center px-4 py-3 hover:text-[var(--accent-red)] hover:opacity-100 transition-all duration-200"
+                className="block px-4 py-2 hover:text-[var(--accent-red)] transition-colors"
               >
                 {item.label}
               </a>
@@ -658,7 +601,7 @@ export default function MenuPage() {
       {/* Menu sections */}
       <section className="flex flex-col gap-14">
         {MENU_DATA.map((section) => (
-          <div key={section.category} id={section.id}>
+          <div key={section.category} id={section.id} className="scroll-mt-32">
             <div className="flex items-baseline justify-between mb-8">
               <h2 className="font-serif text-2xl font-bold border-l-4 border-[var(--accent-red)] pl-4 leading-tight">
                 {section.category}
@@ -671,8 +614,8 @@ export default function MenuPage() {
             </div>
             <div className="flex flex-col">
               {section.items.map((drink, index) => (
-                <AnimateIn key={drink.name} delay={index * 0.1}>
-                  <MenuCard {...drink} />
+                <AnimateIn key={drink.name} delay={index * 0.05}>
+                  <MenuCard {...drink} imageSize={drink.imagePath === '/images/rocks.png' ? 55 : 80} />
                 </AnimateIn>
               ))}
             </div>
@@ -690,7 +633,7 @@ export default function MenuPage() {
         </p>
         <h2 className="font-serif text-3xl font-bold mb-3">Bestill bord</h2>
         <p className="font-sans text-sm opacity-60 mb-8 max-w-xs mx-auto leading-relaxed">
-          Vi har begrenset kapasitet. Send oss en melding for å sikre din plass i Posebyhaven.
+          Vi har begrenset kapasitet. Send oss en melding for å sikre din plass hos oss.
         </p>
         <a
           href="mailto:hei@taar.no"
@@ -707,36 +650,6 @@ export default function MenuPage() {
         </p>
       </footer>
     </main>
-  );
-}
-
-function TaarLogo() {
-  return (
-    <svg
-      width="64"
-      height="64"
-      viewBox="0 0 48 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      style={{ width: "clamp(48px, 8vw, 72px)", height: "auto", aspectRatio: "1" }}
-    >
-      <circle
-        cx="24"
-        cy="24"
-        r="22"
-        stroke="var(--accent-red)"
-        strokeWidth="1.5"
-        fill="none"
-      />
-      <path
-        d="M24 10 L24 38 M14 18 Q24 14 34 18"
-        stroke="var(--accent-red)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        fill="none"
-      />
-    </svg>
   );
 }
 ```
@@ -767,298 +680,41 @@ export default function AnimateIn({ children, delay = 0 }: AnimateInProps) {
 }
 ```
 
-### File: components/GlassIcon.tsx
-```tsx
-interface GlassIconProps {
-  glass: string;
-  className?: string;
-}
-
-export default function GlassIcon({ glass, className = "" }: GlassIconProps) {
-  const base = {
-    viewBox: "0 0 80 80",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg",
-    "aria-hidden": true as const,
-    className: `w-full h-full ${className}`,
-  };
-
-  switch (glass) {
-    case "Highball":
-      return (
-        <svg {...base}>
-          <path
-            d="M22 12 L25 68 L55 68 L58 12 Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M23.5 26 L24.8 68 L55.2 68 L56.5 26 Z"
-            fill="currentColor"
-            fillOpacity="0.08"
-          />
-          <rect
-            x="30"
-            y="32"
-            width="9"
-            height="9"
-            rx="1.5"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            transform="rotate(-8 34.5 36.5)"
-          />
-          <rect
-            x="41"
-            y="35"
-            width="8"
-            height="8"
-            rx="1.5"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            transform="rotate(6 45 39)"
-          />
-          <line
-            x1="46"
-            y1="12"
-            x2="52"
-            y2="42"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <circle cx="27" cy="50" r="1.2" fill="currentColor" fillOpacity="0.2" />
-          <circle cx="28" cy="57" r="0.9" fill="currentColor" fillOpacity="0.15" />
-        </svg>
-      );
-
-    case "Coupe":
-    case "Nick & Nora":
-      return (
-        <svg {...base}>
-          <path
-            d="M14 16 Q14 46 40 50 Q66 46 66 16 Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M17 22 Q18 44 40 47 Q62 44 63 22 Z"
-            fill="currentColor"
-            fillOpacity="0.08"
-          />
-          <line
-            x1="40"
-            y1="50"
-            x2="40"
-            y2="66"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <line
-            x1="28"
-            y1="66"
-            x2="52"
-            y2="66"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <path
-            d="M52 18 Q56 14 58 18 Q60 22 56 24"
-            stroke="currentColor"
-            strokeWidth="1.4"
-            strokeLinecap="round"
-          />
-        </svg>
-      );
-
-    case "Tiki":
-      return (
-        <svg {...base}>
-          <path
-            d="M20 18 L23 68 L57 68 L60 18 Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M22 32 L23 68 L57 68 L58 32 Z"
-            fill="currentColor"
-            fillOpacity="0.08"
-          />
-          <line
-            x1="20"
-            y1="22"
-            x2="60"
-            y2="22"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeOpacity="0.4"
-          />
-          <path
-            d="M24 31 Q30 27 36 31"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M44 31 Q50 27 56 31"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <circle cx="30" cy="37" r="3.5" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="50" cy="37" r="3.5" stroke="currentColor" strokeWidth="1.5" />
-          <path
-            d="M36 45 Q40 49 44 45"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M27 54 Q40 60 53 54"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <line
-            x1="33"
-            y1="54"
-            x2="33"
-            y2="58"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeLinecap="round"
-          />
-          <line
-            x1="40"
-            y1="56"
-            x2="40"
-            y2="60"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeLinecap="round"
-          />
-          <line
-            x1="47"
-            y1="54"
-            x2="47"
-            y2="58"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeLinecap="round"
-          />
-        </svg>
-      );
-
-    case "Beer":
-      return (
-        <svg {...base}>
-          <path
-            d="M18 22 L20 66 L52 66 L54 22 Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M54 30 Q66 30 66 44 Q66 58 54 58"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <path
-            d="M16 22 Q22 16 28 22 Q34 16 40 22 Q46 16 52 22 Q55 16 58 22"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <path
-            d="M19.5 34 L20.8 66 L51.2 66 L52.5 34 Z"
-            fill="currentColor"
-            fillOpacity="0.07"
-          />
-          <circle cx="32" cy="52" r="1.5" fill="currentColor" fillOpacity="0.2" />
-          <circle cx="38" cy="44" r="1" fill="currentColor" fillOpacity="0.2" />
-          <circle cx="42" cy="55" r="1.2" fill="currentColor" fillOpacity="0.2" />
-        </svg>
-      );
-
-    case "Wine":
-      return (
-        <svg {...base}>
-          <path
-            d="M20 12 Q20 38 40 44 Q60 38 60 12 Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M24 28 Q25 40 40 44 Q55 40 56 28 Z"
-            fill="currentColor"
-            fillOpacity="0.09"
-          />
-          <line
-            x1="40"
-            y1="44"
-            x2="40"
-            y2="64"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <line
-            x1="27"
-            y1="64"
-            x2="53"
-            y2="64"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <path
-            d="M34 43 Q36 47 40 48 Q44 47 46 43"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-        </svg>
-      );
-
-    default:
-      return null;
-  }
-}
-```
-
 ### File: components/MenuCard.tsx
 ```tsx
-import GlassIcon from "./GlassIcon";
+import Image from 'next/image';
 
 interface MenuCardProps {
   name: string;
   flavor: string;
   ingredients: string;
-  glass: string;
+  imagePath: string;
+  imageSize?: number;
 }
 
-export default function MenuCard({ name, flavor, ingredients, glass }: MenuCardProps) {
+export default function MenuCard({ name, flavor, ingredients, imagePath, imageSize = 80 }: MenuCardProps) {
   return (
-    <article className="flex items-start gap-5 mb-10 w-full">
-      <div className="w-[72px] shrink-0 flex justify-center items-center pt-1">
-        <div className="w-full aspect-square text-black/60 dark:text-white/50">
-          <GlassIcon glass={glass} />
+    <article className="flex items-center gap-6 md:gap-8 mb-10 w-full">
+      <div className="w-[80px] shrink-0 flex justify-center items-center">
+        <div className="relative aspect-square" style={{ width: imageSize, height: imageSize }}>
+          <Image
+            alt={`${name}`}
+            className="object-contain mix-blend-multiply dark:invert dark:mix-blend-screen dark:opacity-90"
+            fill
+            sizes={`${imageSize}px`}
+            src={imagePath}
+          />
         </div>
       </div>
 
-      <div className="flex flex-col justify-center min-w-0">
-        <h3 className="font-serif text-xl font-bold tracking-tight mb-1 leading-tight">
+      <div className="flex flex-col justify-center">
+        <h3 className="font-serif text-xl font-bold tracking-tight mb-1">
           {name}
         </h3>
-        <p className="font-serif italic text-[1.05rem] leading-snug text-black/75 dark:text-white/85 mb-2">
+        <p className="font-serif italic text-[1.1rem] leading-snug text-black/80 dark:text-white/90 mb-2">
           {flavor}
         </p>
-        <p className="font-sans text-[0.7rem] text-black/45 dark:text-white/45 leading-relaxed uppercase tracking-widest">
+        <p className="font-sans text-sm text-black/50 dark:text-white/50 leading-relaxed uppercase tracking-wider">
           {ingredients}
         </p>
       </div>
