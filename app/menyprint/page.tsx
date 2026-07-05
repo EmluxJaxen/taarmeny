@@ -174,25 +174,16 @@ export default function PrintMenuPage() {
             <div className="w-[148.5mm] h-[210mm] p-[15mm] box-border border-l border-dashed border-black/10 flex flex-col justify-between bg-[#FAF8F5] relative">
               <div className="flex flex-col">
 
-                {/* High-DPI inline SVG brand mark */}
+                {/* Brand mark */}
                 <div className="w-full flex justify-center mb-[4mm] pt-[2mm]">
-                  <svg
-                    width="130"
-                    height="90"
-                    viewBox="0 0 160 110"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-label="Taar Logo"
-                  >
-                    {/* Outer decorative frame */}
-                    <path d="M30 15 L130 18 L125 90 L25 88 Z" stroke="#2C2A28" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M40 25 L120 28 L115 80 L35 78 Z" stroke="#2C2A28" strokeWidth="1" strokeOpacity="0.4" />
-                    {/* Accent swirl */}
-                    <path d="M65 65 C55 60, 50 45, 65 40 C80 35, 95 50, 85 65 C75 75, 60 70, 55 60" stroke="#D9381E" strokeWidth="5" strokeLinecap="round" />
-                    {/* Accent rule */}
-                    <path d="M15 82 L145 85" stroke="#D9381E" strokeWidth="4" strokeLinecap="round" />
-                    <text x="80" y="102" textAnchor="middle" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="9" fontWeight="600" letterSpacing="0.2em" fill="#2C2A28">CAFÉ OG COCKTAILBAR</text>
-                  </svg>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/taarbarlogo.png"
+                    alt="Taar Logo"
+                    width={130}
+                    height={90}
+                    style={{ objectFit: "contain" }}
+                  />
                 </div>
 
                 {/* Pricing declaration */}

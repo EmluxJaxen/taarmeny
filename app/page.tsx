@@ -26,20 +26,12 @@ export default function MenuPage() {
       <header id="konsept" className="mb-12 text-center flex flex-col items-center">
         <div className="flex justify-center items-center mb-6 h-[180px] md:h-[220px]">
           <Image
-            src="/images/logo-light.png"
+            src="/images/taarbarlogo.png"
             alt="Taar logo"
             width={288}
             height={220}
             priority
-            className="object-contain block dark:hidden w-60 md:w-72 h-auto"
-          />
-          <Image
-            src="/images/logo-dark.png"
-            alt="Taar logo"
-            width={288}
-            height={220}
-            priority
-            className="object-contain hidden dark:block w-60 md:w-72 h-auto"
+            className="object-contain w-60 md:w-72 h-auto"
           />
         </div>
         <h1 className="sr-only">Taar Café og Cocktailbar - Menyen</h1>
