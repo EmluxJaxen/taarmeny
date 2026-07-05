@@ -2,55 +2,15 @@ import Image from "next/image";
 import MenuCard from "@/components/MenuCard";
 import ThemeToggle from "@/components/ThemeToggle";
 import AnimateIn from "@/components/AnimateIn";
-
-const MENU_DATA = [
-  {
-    id: "signatur",
-    category: "Cocktailmeny",
-    price: "kr 189,-",
-    items: [
-      { name: "Thai basilikum", flavor: "Grønn, aromatisk, floral, leskende", ingredients: "Thai basilikum-infusert gin · bergamotlikør · tequila · sukkerlake · eplesyre · kullsyrevann", imagePath: "/images/highball.png" },
-      { name: "Venezuela's ånd", flavor: "Frisk, urtepreget, krydret, syrlig, tropisk", ingredients: "Lys rom, Green Chartreuse, falernum, kanelsirup, sitron, lime, agurk", imagePath: "/images/highball.png" },
-      { name: "Blomsten fra Jerez", flavor: "Tørr, nøttepreget, fruktig, syrlig, rund", ingredients: "Amontillado sherry · rom · aprikoslikør · sukkerlake · sitron · Angostura bitters", imagePath: "/images/coupe.png" },
-      { name: "Te-tid", flavor: "Lys, te-aroma, ren syre, subtil sødme, frisk", ingredients: "Darjeeling-infusert melkevasket vodka, honningsirup, sitron", imagePath: "/images/coupe.png" },
-      { name: "Siste blomst", flavor: "Røykfylt, floral, urtepreget, spenstig", ingredients: "Mezcal, St-Germain, Bénédictine D.O.M., sitron", imagePath: "/images/nick&nora.png" },
-      { name: "Eksperimentet", flavor: "Mørk, krydret, aromatisk, med mange lag", ingredients: "Bourbon · fino sherry · Cocchi Americano · Bénédictine · Angostura bitters · orange bitters · Peychaud's bitters", imagePath: "/images/nick&nora.png" },
-      { name: "Bivoks", flavor: "Varm, aromatisk, mild honning, sofistikert", ingredients: "Bivoks-infusert bourbon · cognac · sukkerlake · Angostura bitters · Peychaud's bitters", imagePath: "/images/rocks.png" },
-    ],
-  },
-  {
-    id: "manedens",
-    category: "Månedens Utvalgte",
-    price: null,
-    items: [
-      { name: "Månedens Margarita", flavor: "Fruktig, spicy, saftig", ingredients: "Jalapeño-infusert tequila, Cointreau, klarifisert jordbær, agave, lime", imagePath: "/images/rocks.png" },
-      { name: "Månedens Tiki", flavor: "Tropisk, rund, fyldig, frisk", ingredients: "Smørvasket jamaicansk rom, bananlikør, lønnesirup, lime", imagePath: "/images/tiki.png" },
-      { name: "Månedens Negroni", flavor: "Frisk, lett bitter, floral, sitruspreget", ingredients: "Aperol · Lillet Blanc · Hendrick's gin", imagePath: "/images/rocks.png" },
-    ],
-  },
-  {
-    id: "ol",
-    category: "Øl",
-    price: null,
-    items: [
-      { name: "Husets Øl", flavor: "Spør oss om dagens utvalg", ingredients: "Lokalt og internasjonalt", imagePath: "/images/highball.png" },
-    ],
-  },
-  {
-    id: "vin",
-    category: "Vin",
-    price: null,
-    items: [
-      { name: "Husets Vin", flavor: "Utvalgte glass", ingredients: "Rødt, hvitt, oransje eller bobler", imagePath: "/images/nick&nora.png" },
-    ],
-  },
-];
+import { MENU_DATA } from "@/lib/menu-data";
 
 const NAV_ITEMS = [
   { label: "Cocktailmeny", href: "#signatur" },
   { label: "Månedens utvalgte", href: "#manedens" },
+  { label: "Alkoholfritt", href: "#alkoholfritt" },
   { label: "Øl", href: "#ol" },
   { label: "Vin", href: "#vin" },
+  { label: "Kaffe", href: "#kaffe" },
 ];
 
 export default function MenuPage() {
@@ -133,7 +93,10 @@ export default function MenuPage() {
             <div className="flex flex-col">
               {section.items.map((drink, index) => (
                 <AnimateIn key={drink.name} delay={index * 0.05}>
-                  <MenuCard {...drink} imageSize={drink.imagePath === '/images/rocks.png' ? 55 : 80} />
+                  <MenuCard
+                    {...drink}
+                    imageSize={drink.imagePath === '/images/rocks.png' ? 55 : 80}
+                  />
                 </AnimateIn>
               ))}
             </div>
@@ -154,7 +117,7 @@ export default function MenuPage() {
           Vi har begrenset kapasitet. Send oss en melding for å sikre din plass hos oss.
         </p>
         <a
-          href="mailto:hei@taar.no"
+          href="mailto:hei@taarbar.no"
           className="inline-block font-sans text-[0.7rem] uppercase tracking-widest font-semibold px-8 py-3 border border-[var(--accent-red)] text-[var(--accent-red)] rounded-full hover:bg-[var(--accent-red)] hover:text-white transition-all duration-300"
         >
           Send forespørsel
@@ -162,8 +125,20 @@ export default function MenuPage() {
       </section>
 
       {/* Footer */}
-      <footer className="mt-10 pt-8 border-t border-black/10 dark:border-white/10 text-center">
-        <p className="font-sans text-xs uppercase tracking-widest opacity-30">
+      <footer className="mt-10 pt-8 border-t border-black/10 dark:border-white/10 text-center space-y-2">
+        <p className="font-sans text-xs uppercase tracking-widest opacity-50">
+          Bestill bord{" "}
+          <a href="mailto:hei@taarbar.no" className="hover:text-[var(--accent-red)] transition-colors">
+            hei@taarbar.no
+          </a>
+        </p>
+        <p className="font-sans text-xs uppercase tracking-widest opacity-50">
+          Ønsker du å arrangere noe hos oss?{" "}
+          <a href="mailto:hei@taarbar.no" className="hover:text-[var(--accent-red)] transition-colors">
+            hei@taarbar.no
+          </a>
+        </p>
+        <p className="font-sans text-xs uppercase tracking-widest opacity-30 pt-2">
           Posebyhaven · Kristiansand
         </p>
       </footer>
