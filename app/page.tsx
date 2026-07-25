@@ -2,7 +2,9 @@ import Image from "next/image";
 import MenuCard from "@/components/MenuCard";
 import ThemeToggle from "@/components/ThemeToggle";
 import AnimateIn from "@/components/AnimateIn";
-import { MENU_DATA } from "@/lib/menu-data";
+import { getMenuData } from "@/lib/dal";
+
+export const dynamic = "force-dynamic";
 
 const NAV_ITEMS = [
   { label: "Cocktailmeny", href: "#signatur" },
@@ -11,9 +13,12 @@ const NAV_ITEMS = [
   { label: "Øl", href: "#ol" },
   { label: "Vin", href: "#vin" },
   { label: "Kaffe", href: "#kaffe" },
+  { label: "Snacks", href: "#snacks" },
 ];
 
-export default function MenuPage() {
+export default async function MenuPage() {
+  const menuData = await getMenuData();
+
   return (
     <main className="min-h-screen pb-24 max-w-2xl mx-auto px-6 pt-12 selection:bg-[var(--accent-red)] selection:text-white">
 
@@ -68,9 +73,9 @@ export default function MenuPage() {
         </ul>
       </nav>
 
-      {/* Menu sections */}
+      {/* Menu sections - powered by DB DAL */}
       <section className="flex flex-col gap-14">
-        {MENU_DATA.map((section) => (
+        {menuData.map((section) => (
           <div key={section.category} id={section.id} className="scroll-mt-32">
             <div className="flex items-baseline justify-between mb-8">
               <h2 className="font-serif text-2xl font-bold border-l-4 border-[var(--accent-red)] pl-4 leading-tight">

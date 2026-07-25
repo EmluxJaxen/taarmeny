@@ -34,8 +34,8 @@ export const MENU_DATA: MenuCategory[] = [
     category: "Månedens Utvalgte",
     price: "kr 189,-",
     items: [
-      { name: "Månedens Margarita", flavor: "Fruktig, spicy, saftig", ingredients: "Jalapeño-infusert tequila · Cointreau · klarifisert jordbær · agave · lime", imagePath: "/images/rocks.png" },
-      { name: "Månedens Tiki", flavor: "Tropisk, rund, fyldig, frisk", ingredients: "Smørvasket jamaicansk rom · bananlikør · lønnesirup · lime", imagePath: "/images/tiki.png" },
+      { name: "Månedens Margarita", flavor: "Fruktig, spicy, saftig", ingredients: "Jalapeño-infusert tequila · Cointreau · klarifisert jordbær · agave · lime · lava salt", imagePath: "/images/coupe.png" },
+      { name: "Månedens Tiki", flavor: "Tropisk, fruktig, syrlig, funky", ingredients: "Rom fra jamaica · rom fra Trinidad og Tobago · pasjonsfrukt · jordbær · mango · ananas · granateple · appelsinblomst · sitron · lime", imagePath: "/images/tiki.png" },
       { name: "Månedens Negroni", flavor: "Frisk, lett bitter, floral, sitruspreget", ingredients: "Aperol · Lillet Blanc · Hendrick's gin", imagePath: "/images/rocks.png" },
     ],
   },
@@ -55,7 +55,7 @@ export const MENU_DATA: MenuCategory[] = [
     price: null,
     items: [
       { name: "Husets øl (CB)", price: "kr 139,-", subtitle: "0,5 l på tapp" },
-      { name: "Nøgne Ø Blonde", price: "kr 139,-", subtitle: "0,5 l på tapp" },
+      { name: "Nøgne Ø Blonde", price: "kr 139,-", subtitle: "0,4 l på tapp" },
     ],
   },
   {
@@ -63,7 +63,7 @@ export const MENU_DATA: MenuCategory[] = [
     category: "Vin",
     price: null,
     items: [
-      { name: "Husets vin", price: "Glass kr 129,- / Flaske kr 649,-", subtitle: "Rødt, hvitt, oransje eller friske bobler" },
+      { name: "Husets vin", price: "Glass kr 129,- / Flaske kr 625,-", subtitle: "Rødt, hvitt, rosé eller friske bobler" },
     ],
   },
   {
@@ -71,13 +71,23 @@ export const MENU_DATA: MenuCategory[] = [
     category: "Kaffe",
     price: null,
     items: [
-      { name: "Espresso, enkel", price: "kr 35,-" },
+      { name: "Filter kaffe", price: "kr 49,-" },
       { name: "Espresso, dobbel", price: "kr 45,-" },
       { name: "Americano", price: "kr 45,-" },
-      { name: "Macchiato", price: "kr 48,-" },
+      { name: "Macchiato", price: "kr 49,-" },
       { name: "Cortado", price: "kr 53,-" },
       { name: "Cappuccino", price: "kr 55,-" },
       { name: "Caffe latte", price: "kr 59,-" },
+    ],
+  },
+  {
+    id: "snacks",
+    category: "Snacks",
+    price: null,
+    items: [
+      { name: "Oliven, Castelvetrano", price: "kr 59,-" },
+      { name: "Peanøtter", price: "kr 59,-" },
+      { name: "Chips", price: "kr 59,-" },
     ],
   },
 ];
