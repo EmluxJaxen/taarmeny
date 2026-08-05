@@ -36,6 +36,7 @@ export async function getMenuData(): Promise<MenuCategory[]> {
     if (!categoryMap.has(row.categoryId)) {
       categoryMap.set(row.categoryId, {
         id: row.categorySlug,
+        dbId: row.categoryId,
         category: row.categoryName,
         price: row.categoryPrice,
         items: [],
@@ -43,7 +44,7 @@ export async function getMenuData(): Promise<MenuCategory[]> {
     }
 
     if (row.itemId !== null) {
-      const item: MenuItem = { name: row.itemName! };
+      const item: MenuItem = { name: row.itemName!, dbId: row.itemId! };
       if (row.itemPrice) item.price = row.itemPrice;
       if (row.itemFlavor) item.flavor = row.itemFlavor;
       if (row.itemSubtitle) item.subtitle = row.itemSubtitle;

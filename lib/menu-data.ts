@@ -5,6 +5,7 @@ export interface MenuItem {
   ingredients?: string; // cocktail ingredient list
   subtitle?: string;    // format descriptor, e.g. "0,5 l på tapp" or "Flaske · 0,33l"
   imagePath?: string;
+  dbId?: number;        // menu_items.id — only present when sourced from the DB (admin use)
 }
 
 export interface MenuCategory {
@@ -12,6 +13,7 @@ export interface MenuCategory {
   category: string;
   price: string | null;
   items: MenuItem[];
+  dbId?: number;         // categories.id — only present when sourced from the DB (admin use)
 }
 
 export const MENU_DATA: MenuCategory[] = [
@@ -54,7 +56,7 @@ export const MENU_DATA: MenuCategory[] = [
     category: "Øl",
     price: null,
     items: [
-      { name: "Husets øl (CB)", price: "kr 139,-", subtitle: "0,5 l på tapp" },
+      { name: "Husets øl (CB)", price: "kr 139,-", subtitle: "0,4 l på tapp" },
       { name: "Nøgne Ø Blonde", price: "kr 139,-", subtitle: "0,4 l på tapp" },
     ],
   },

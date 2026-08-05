@@ -56,10 +56,10 @@ export default async function MenuPage() {
       {/* Sticky category nav */}
       <nav
         id="meny"
-        className="sticky top-0 z-50 flex items-center bg-[var(--bg-primary)]/80 backdrop-blur-md pt-[calc(env(safe-area-inset-top)+1rem)] pb-4 md:pt-[calc(env(safe-area-inset-top)+1.25rem)] md:pb-5 mb-12 -mx-6 px-6 border-y border-black/10 dark:border-white/10 overflow-x-auto no-scrollbar"
+        className="sticky top-0 z-50 bg-[var(--bg-primary)]/80 backdrop-blur-md pt-[calc(env(safe-area-inset-top)+1rem)] pb-4 md:pt-[calc(env(safe-area-inset-top)+1.25rem)] md:pb-5 mb-12 -mx-6 border-y border-black/10 dark:border-white/10 overflow-x-auto no-scrollbar"
         aria-label="Menykategorier"
       >
-        <ul className="flex gap-2 items-center font-sans text-xs uppercase tracking-widest font-semibold opacity-70 w-max">
+        <ul className="flex gap-2 items-center font-sans text-xs uppercase tracking-widest font-semibold opacity-70 w-max px-6">
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
               <a
