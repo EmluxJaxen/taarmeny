@@ -1,5 +1,5 @@
 import { db } from "@/db/client";
-import { categories, menuItems } from "@/db/schema";
+import { categories, menuItems, openingHours, type OpeningHour } from "@/db/schema";
 import { asc, eq } from "drizzle-orm";
 import type { MenuCategory, MenuItem } from "@/lib/menu-data";
 
@@ -56,4 +56,11 @@ export async function getMenuData(): Promise<MenuCategory[]> {
   }
 
   return Array.from(categoryMap.values());
+}
+
+export async function getOpeningHours(): Promise<OpeningHour[]> {
+  return await db
+    .select()
+    .from(openingHours)
+    .orderBy(asc(openingHours.sortOrder));
 }

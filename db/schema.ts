@@ -33,6 +33,15 @@ export const menuItems = pgTable("menu_items", {
   sortOrder: integer("sort_order").notNull().default(0),
 });
 
+export const openingHours = pgTable("opening_hours", {
+  id: serial("id").primaryKey(),
+  dayName: text("day_name").notNull(),
+  hours: text("hours").notNull(),
+  sortOrder: integer("sort_order").notNull().default(0),
+});
+
+export type OpeningHour = typeof openingHours.$inferSelect;
+
 export const categoriesRelations = relations(categories, ({ many }) => ({
   items: many(menuItems),
 }));

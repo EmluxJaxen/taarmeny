@@ -7,11 +7,21 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { categories, menuItems } from "./schema";
+import { categories, menuItems, openingHours } from "./schema";
 import { MENU_DATA } from "../lib/menu-data";
 
+const DEFAULT_OPENING_HOURS = [
+  { dayName: "Mandag", hours: "Stengt", sortOrder: 0 },
+  { dayName: "Tirsdag", hours: "17–23", sortOrder: 1 },
+  { dayName: "Onsdag", hours: "17–23", sortOrder: 2 },
+  { dayName: "Torsdag", hours: "17–23", sortOrder: 3 },
+  { dayName: "Fredag", hours: "17–01", sortOrder: 4 },
+  { dayName: "Lørdag", hours: "11–01", sortOrder: 5 },
+  { dayName: "Søndag", hours: "14–19", sortOrder: 6 },
+];
+
 async function seed() {
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString = process.env.DIRECT_URL ?? process.env.DATABASE_URL;
   if (!connectionString) {
     throw new Error("DATABASE_URL is not set. Add it to .env.local");
   }
@@ -55,6 +65,10 @@ async function seed() {
       console.log(`      • ${item.name}`);
     }
   }
+
+  await db.delete(openingHours);
+  await db.insert(openingHours).values(DEFAULT_OPENING_HOURS);
+  console.log("  ✓ Opening hours seeded.");
 
   console.log("\n✅  Seed complete.");
   await client.end();

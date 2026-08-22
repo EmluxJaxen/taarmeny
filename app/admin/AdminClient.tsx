@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import type { MenuCategory, MenuItem } from '@/lib/menu-data';
-import { addMenuItem, updateMenuItem, deleteMenuItem, saveCategoryOrder } from './actions';
+import type { OpeningHour } from '@/db/schema';
+import { addMenuItem, updateMenuItem, deleteMenuItem, saveCategoryOrder, updateOpeningHours } from './actions';
 
 type EditTarget = MenuItem & { dbId: number };
 type AddTarget = { categoryId: number; categoryName: string };
@@ -16,7 +17,13 @@ const IMAGE_OPTIONS = [
   { value: '/images/tiki.png', label: 'TIKI' },
 ];
 
-export default function AdminClient({ menuData }: { menuData: MenuCategory[] }) {
+export default function AdminClient({
+  menuData,
+  openingHours,
+}: {
+  menuData: MenuCategory[];
+  openingHours: OpeningHour[];
+}) {
   const [editTarget, setEditTarget] = useState<EditTarget | null>(null);
   const [addTarget, setAddTarget] = useState<AddTarget | null>(null);
   const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
@@ -68,6 +75,43 @@ export default function AdminClient({ menuData }: { menuData: MenuCategory[] }) 
           {localCategories.reduce((sum, c) => sum + c.items.length, 0)} varer · {localCategories.length} kategorier
         </div>
       </header>
+
+      {/* Opening hours */}
+      <section className="border-2 border-black mb-14">
+        <div className="bg-black text-white px-6 py-4">
+          <h2 className="text-lg font-black uppercase tracking-wide">Åpningstider</h2>
+        </div>
+        <form
+          key={openingHours.map((row) => `${row.id}:${row.hours}`).join('|')}
+          action={updateOpeningHours}
+        >
+          {openingHours.map((row) => (
+            <div
+              key={row.id}
+              className="px-6 py-4 flex flex-wrap items-center gap-4 border-t-2 border-black"
+            >
+              <input type="hidden" name="id" value={row.id} />
+              <span className="font-bold uppercase tracking-tight w-28 shrink-0">
+                {row.dayName}
+              </span>
+              <input
+                name="hours"
+                defaultValue={row.hours}
+                required
+                className="flex-1 min-w-[140px] border-2 border-black bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent-red)] transition-colors"
+              />
+            </div>
+          ))}
+          <div className="px-6 py-4 border-t-2 border-black flex justify-end">
+            <button
+              type="submit"
+              className="px-6 py-3 bg-[var(--accent-red)] text-white text-xs font-bold uppercase tracking-widest hover:bg-black transition-colors"
+            >
+              Lagre åpningstider
+            </button>
+          </div>
+        </form>
+      </section>
 
       {/* Categories */}
       <div className="flex flex-col gap-14">

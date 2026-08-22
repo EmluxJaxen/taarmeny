@@ -2,7 +2,7 @@ import Image from "next/image";
 import MenuCard from "@/components/MenuCard";
 import ThemeToggle from "@/components/ThemeToggle";
 import AnimateIn from "@/components/AnimateIn";
-import { getMenuData } from "@/lib/dal";
+import { getMenuData, getOpeningHours } from "@/lib/dal";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +17,10 @@ const NAV_ITEMS = [
 ];
 
 export default async function MenuPage() {
-  const menuData = await getMenuData();
+  const [menuData, openingHours] = await Promise.all([
+    getMenuData(),
+    getOpeningHours(),
+  ]);
 
   return (
     <main className="min-h-screen pb-24 max-w-2xl mx-auto px-6 pt-12 selection:bg-[var(--accent-red)] selection:text-white">
@@ -120,6 +123,26 @@ export default async function MenuPage() {
           Send forespørsel
         </a>
       </section>
+
+      {/* Opening hours */}
+      {openingHours.length > 0 && (
+        <section className="mt-16 text-center">
+          <p className="font-sans uppercase tracking-[0.2em] text-xs opacity-50 mb-6">
+            Åpningstider
+          </p>
+          <dl className="max-w-xs mx-auto space-y-2">
+            {openingHours.map((row) => (
+              <div
+                key={row.id}
+                className="flex justify-between font-sans text-xs uppercase tracking-widest opacity-70"
+              >
+                <dt>{row.dayName}</dt>
+                <dd>{row.hours}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
 
       {/* Footer */}
       <footer className="mt-10 pt-8 border-t border-black/10 dark:border-white/10 text-center space-y-2">

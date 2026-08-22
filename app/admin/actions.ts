@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { and, eq, max } from 'drizzle-orm';
 import { db } from '@/db/client';
-import { menuItems } from '@/db/schema';
+import { menuItems, openingHours } from '@/db/schema';
 
 function revalidateMenuPaths() {
   revalidatePath('/admin');
@@ -101,4 +101,21 @@ export async function saveCategoryOrder(formData: FormData) {
   });
 
   revalidateMenuPaths();
+}
+
+export async function updateOpeningHours(formData: FormData) {
+  const ids = formData.getAll('id').map(Number);
+  const hours = formData.getAll('hours').map(String);
+
+  await db.transaction(async (tx) => {
+    for (let i = 0; i < ids.length; i++) {
+      await tx
+        .update(openingHours)
+        .set({ hours: hours[i] })
+        .where(eq(openingHours.id, ids[i]));
+    }
+  });
+
+  revalidatePath('/admin');
+  revalidatePath('/');
 }

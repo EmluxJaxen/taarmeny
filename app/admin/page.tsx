@@ -1,4 +1,4 @@
-import { getMenuData } from '@/lib/dal';
+import { getMenuData, getOpeningHours } from '@/lib/dal';
 import AdminClient from './AdminClient';
 
 // Admin data must always be fresh — never serve a cached/stale menu snapshot.
@@ -8,11 +8,14 @@ export const dynamic = 'force-dynamic';
 // `admin_session` cookie set by app/login/actions.ts.
 
 export default async function AdminPage() {
-  const menuData = await getMenuData();
+  const [menuData, openingHours] = await Promise.all([
+    getMenuData(),
+    getOpeningHours(),
+  ]);
 
   return (
     <main className="min-h-screen bg-white selection:bg-[var(--accent-red)] selection:text-white">
-      <AdminClient menuData={menuData} />
+      <AdminClient menuData={menuData} openingHours={openingHours} />
     </main>
   );
 }
